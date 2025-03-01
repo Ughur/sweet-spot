@@ -1,8 +1,15 @@
+import Cart from './components/Cart';
+import DessertGrid from './components/DessertGrid';
+import useDesserts from './hooks/useDesserts';
+
 const App = () => {
+  const { data: desserts } = useDesserts();
+  const safeDesserts = desserts ?? [];
   return (
-    <h1 className='text-3xl font-bold underline'>
-      Hello world!
-    </h1>
+    <>
+      <DessertGrid desserts={safeDesserts} />
+      <Cart desserts={safeDesserts} />
+    </>
   );
 };
 
