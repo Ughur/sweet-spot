@@ -6,7 +6,7 @@ interface Props {
   desserts: Dessert[];
 }
 const Cart = ({ desserts }: Props) => {
-  const { data: cart } = useCart();
+  const { cart } = useCart();
   return (
     <>
       <h1 className='text-red text-2xl font-bold'>

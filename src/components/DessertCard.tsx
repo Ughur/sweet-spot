@@ -1,9 +1,21 @@
+import { useState } from 'react';
+import useCart from '../hooks/useCart';
 import { Dessert } from '../types/desserts';
 import AddToCartButton from './AddToCartButton';
 interface Props {
   dessert: Dessert;
 }
 const DessertCard = ({ dessert }: Props) => {
+  const { addToCart, updateCart, deleteCart, cart } =
+    useCart();
+
+  const cartId = cart?.find(
+    (item) => item.dessertId === dessert.id
+  );
+
+  const [quantity, setQuantity] = useState(
+    cartId?.quantity ?? 0
+  );
   return (
     <div>
       <div className='rounded-md overflow-hidden'>
@@ -44,9 +56,39 @@ const DessertCard = ({ dessert }: Props) => {
         '
         >
           <AddToCartButton
-            quantity={0}
-            onDecrement={() => {}}
-            onIncrement={() => {}}
+            quantity={quantity}
+            onAddToCart={() => {
+              setQuantity(1);
+              addToCart.mutate({
+                dessertId: dessert.id,
+                quantity: 1,
+              });
+            }}
+            onDecrement={() => {
+              setQuantity(quantity - 1);
+
+              if (quantity <= 1) {
+                deleteCart.mutate(cartId?.id ?? 1);
+              }
+
+              updateCart.mutate({
+                id: cartId?.id ?? 1,
+                data: {
+                  dessertId: dessert.id,
+                  quantity: quantity - 1,
+                },
+              });
+            }}
+            onIncrement={() => {
+              setQuantity(quantity + 1);
+              updateCart.mutate({
+                id: cartId?.id ?? 1,
+                data: {
+                  dessertId: dessert.id,
+                  quantity: quantity + 1,
+                },
+              });
+            }}
           />
         </div>
       </div>

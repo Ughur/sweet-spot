@@ -1,5 +1,5 @@
 export interface Cart {
-    id: number;
+    id?: number;
     dessertId: number;
     quantity: number;
 }

@@ -9,6 +9,7 @@ const CartItem = ({ cartItem, dessert }: Props) => {
   return (
     <div key={cartItem.id}>
       <h1>{dessert?.name}</h1>
+      <p>{cartItem.quantity}</p>
     </div>
   );
 };
