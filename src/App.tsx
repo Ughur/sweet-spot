@@ -7,11 +7,11 @@ const App = () => {
   const safeDesserts = desserts ?? [];
   return (
     <div className='container mx-auto p-4'>
-      <div className='flex flex-col md:flex-row gap-6'>
+      <div className='flex flex-col lg:flex-row gap-6'>
         <div className='flex-1'>
           <DessertGrid desserts={safeDesserts} />
         </div>
-        <div className='w-full md:w-1/6 lg:w-1/4'>
+        <div className='w-full  lg:w-1/4'>
           <Cart desserts={safeDesserts} />
         </div>
       </div>
