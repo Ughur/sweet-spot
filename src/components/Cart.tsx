@@ -8,8 +8,10 @@ interface Props {
 const Cart = ({ desserts }: Props) => {
   const { data: cart } = useCart();
   return (
-    <div>
-      <h1>Cart</h1>
+    <>
+      <h1 className='text-red text-2xl font-bold'>
+        Your Cart(2)
+      </h1>
       {cart?.map((cartItem) => (
         <CartItem
           key={cartItem.id}
@@ -19,7 +21,7 @@ const Cart = ({ desserts }: Props) => {
           )}
         />
       ))}
-    </div>
+    </>
   );
 };
 

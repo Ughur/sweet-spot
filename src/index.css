@@ -1,21 +1,37 @@
 @import 'tailwindcss';
 
 @theme {
-  --red: hsl(14, 86%, 42%);
-  --green: hsl(159, 69%, 38%);
-  --rose-50: hsl(20, 50%, 98%);
-  --rose-100: hsl(13, 31%, 94%);
-  --rose-300: hsl(14, 25%, 72%);
-  --rose-400: hsl(7, 20%, 60%);
-  --rose-500: hsl(12, 20%, 44%);
-  --rose-900: hsl(14, 65%, 9%);
-
+  --color-red: oklch(0.57 0.19 30.94);
+  --color-green: oklch(0.58 0.16 159.97);
+  --color-rose-50: oklch(0.98 0.01 25.36);
+  --color-rose-100: oklch(0.94 0.02 19.35);
+  --color-rose-300: oklch(0.76 0.03 19.35);
+  --color-rose-400: oklch(0.65 0.03 14.04);
+  --color-rose-500: oklch(0.5 0.03 19.35);
+  --color-rose-900: oklch(0.17 0.07 30.94);
   --font-family: 'Red Hat Text', sans-serif;
   --text-body: 16px;
+
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 }
 
 @layer base {
   body {
     @apply font-family text-body;
+  }
+}
+
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+@layer components {
+  .icon-container {
+    @apply w-5 h-5 border-2  rounded-full flex-center cursor-pointer hover:bg-white;
+    &:hover path {
+      fill: var(--color-red);
+    }
   }
 }
