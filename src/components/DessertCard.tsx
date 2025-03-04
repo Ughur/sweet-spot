@@ -18,7 +18,11 @@ const DessertCard = ({ dessert }: Props) => {
 
   return (
     <div>
-      <div className='rounded-md overflow-hidden'>
+      <div
+        className={`${
+          quantity > 0 ? 'border-2 border-red' : 'border-transparent'
+        } rounded-md overflow-hidden`}
+      >
         <picture>
           <source srcSet={dessert.image.mobile} media='(max-width: 640px)' />
           <source srcSet={dessert.image.tablet} media='(max-width: 1280px)' />

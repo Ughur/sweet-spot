@@ -9,7 +9,7 @@ interface Props {
 }
 const CartItem = ({ cartItem, dessert, onRemoveFromCart }: Props) => {
   return (
-    <div key={cartItem.id} className='flex justify-between items-center mt-4'>
+    <div key={cartItem.id} className='flex justify-between items-center mb-8'>
       <div className='flex flex-col'>
         <h1 className='font-medium text-rose-900'>{dessert?.name}</h1>
         <div className='flex gap-2 text-rose-500'>
