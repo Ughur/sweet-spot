@@ -3,12 +3,21 @@ import { Dessert } from '../types/desserts';
 import CartItem from './CartItem';
 import EmptyCartImage from '../assets/images/illustration-empty-cart.svg?react';
 import CarbonNeutralImage from '../assets/images/icon-carbon-neutral.svg?react';
+import { useState } from 'react';
+import OrderConfirmationModal from './OrderConfirmationModal';
 interface Props {
   desserts: Dessert[];
 }
 const Cart = ({ desserts }: Props) => {
   const { cart, deleteCart } = useCart();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const totalSum = cart?.reduce(
+    (acc, item) =>
+      acc +
+      item.quantity *
+        (desserts?.find((d) => d.id === item.dessertId)?.price ?? 0),
+    0
+  );
   return (
     <div className='cart-container'>
       <h1 className='text-red text-2xl font-bold'>
@@ -37,15 +46,7 @@ const Cart = ({ desserts }: Props) => {
             <div className='flex justify-between items-center mt-5'>
               <span className='text-rose-500 font-medium'>Order Total</span>
               <span className='text-rose-900 font-bold text-2xl'>
-                $
-                {cart?.reduce(
-                  (acc, item) =>
-                    acc +
-                    item.quantity *
-                      (desserts?.find((d) => d.id === item.dessertId)?.price ??
-                        0),
-                  0
-                )}
+                ${totalSum}
               </span>
             </div>
             <p className='flex-center gap-1 mt-6'>
@@ -56,12 +57,20 @@ const Cart = ({ desserts }: Props) => {
               className='flex-center w-full mt-6 
             bg-red rounded-full px-4 py-3 text-white cursor-pointer
             font-medium  transition-colors hover:bg-[#6B1515]'
+              onClick={() => setIsModalOpen(true)}
             >
               Confirm Order
             </button>
           </div>
         </>
       )}
+      <OrderConfirmationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        total={totalSum || 0}
+        cart={cart}
+        desserts={desserts}
+      />
     </div>
   );
 };
